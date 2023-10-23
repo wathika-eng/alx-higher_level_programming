@@ -3,7 +3,7 @@
 
 def safe_print_list_integers(my_list=[], x=0):
     tt = 0
-    for i in range(0, x):
+    for i in range(0, 6):
         try:
             print("{:d}".format(my_list[i]), end="")
             tt += 1
