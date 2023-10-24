@@ -1,12 +1,7 @@
 #!/usr/bin/python3
-
-"""
-Write an empty class Square that defines a square:
-"""
-
+# first task
+"""Define an empty class Square that defines a square:"""
 
 class Square:
+    """Make the class."""
     pass
-    """
-    making the class
-    """
