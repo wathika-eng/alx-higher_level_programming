@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 
-"""
-Write a class Square that defines a square by: (based on 2-square.py)
-"""
+"""Define a class Square that defines a square by: (based on 2-square.py)"""
 
 
 class Square:
+    """Make the square"""
+
     def __init__(self, size=0):
-        """
-        Private instance attribute: size
-        Instantiation with optional size: def __init__(self, size=0):
+        """Init the Square
+        Argc:
+            size in int
         """
         if not isinstance(size, int):
             raise TypeError("size must be an integer")
@@ -18,4 +18,5 @@ class Square:
         self.__size = size
 
     def area(self):
+        """Function to calculate area"""
         return self.__size * self.__size
