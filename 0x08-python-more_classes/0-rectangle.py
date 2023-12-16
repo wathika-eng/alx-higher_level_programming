@@ -2,6 +2,8 @@
 
 """ Class to define Rectangle """
 
+
 class Rectangle:
-    """ Start of the class """
+    """Start of the class"""
+
     pass
