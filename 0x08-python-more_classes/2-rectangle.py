@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-""" A class to make a real rectangle """
+""" Rectangle class """
 
 
 class Rectangle:
-    """ A class to make a real rectangle"""
+    """ Rectangle class """
 
     def __init__(self, width=0, height=0):
         """ Initialize
@@ -14,6 +14,7 @@ class Rectangle:
             TypeError: width and height
             ValueError: width and height
         """
+        self.__perimeter = None
         self.width = width
         self.height = height
 
@@ -45,3 +46,10 @@ class Rectangle:
             raise ValueError("height must be >= 0")
         self.__height = value
 
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        if self.width or self.height == 0:
+            self.__perimeter = 0
+        return self.width + self.height
