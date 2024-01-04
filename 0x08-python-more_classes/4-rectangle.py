@@ -14,7 +14,6 @@ class Rectangle:
             TypeError: width and height
             ValueError: width and height
         """
-        self.__perimeter = None
         self.width = width
         self.height = height
 
@@ -53,7 +52,8 @@ class Rectangle:
     def perimeter(self):
         """Return the perimeter of the Rectangle."""
         return 0 if self.width == 0 or self.height == 0 else (
-            self.width + self.height) * 2
+                (self.width * 2) + (self.height * 2))
+
     def __str__(self):
         """Return the printable representation of the Rectangle.
         Represents the rectangle with the # character.
@@ -70,6 +70,6 @@ class Rectangle:
 
     def __repr__(self):
         """Return the string representation of the Rectangle."""
-        rect = "Rectangle(" + str(self.__width)
-        rect += ", " + str(self.__height) + ")"
-        return rect
+        rectangle = "Rectangle(" + str(self.__width)
+        rectangle += ", " + str(self.__height) + ")"
+        return rectangle

@@ -14,7 +14,6 @@ class Rectangle:
             TypeError: width and height
             ValueError: width and height
         """
-        self.__perimeter = None
         self.width = width
         self.height = height
 
@@ -47,13 +46,33 @@ class Rectangle:
         self.__height = value
 
     def area(self):
+        """Return the area of the Rectangle."""
         return self.width * self.height
 
     def perimeter(self):
+        """Return the perimeter of the Rectangle."""
         return 0 if self.width == 0 or self.height == 0 else (
-            self.width + self.height) * 2
-    def __str__(self):
-        if self.width == 0 or self.height == 0:
-            return 0
-        return (self.__width * 2) + (self.__height * 2)
+                (self.width * 2) + (self.height * 2))
 
+    def __str__(self):
+        """Return the printable representation of the Rectangle.
+        Represents the rectangle with the # character.
+        """
+        if self.__width == 0 or self.__height == 0:
+            return ""
+
+        rectangle = []
+        for i in range(self.__height):
+            [rectangle.append('#') for j in range(self.__width)]
+            if i != self.__height - 1:
+                rectangle.append("\n")
+        return "".join(rectangle)
+
+    def __repr__(self):
+        """Return the string representation of the Rectangle."""
+        rectangle = "Rectangle(" + str(self.__width)
+        rectangle += ", " + str(self.__height) + ")"
+        return rectangle
+    def __del__(self):
+        """Print a message for every deletion of a Rectangle."""
+        print("Bye rectangle...")
