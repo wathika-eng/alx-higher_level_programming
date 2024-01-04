@@ -3,10 +3,10 @@
 
 
 class Rectangle:
-    """ A class to make a real rectangle"""
+    """A class to make a real rectangle"""
 
     def __init__(self, width=0, height=0):
-        """ Initialize
+        """Initialize
         Args:
             width (int): width of the rectangle
             height (int): height of the rectangle
@@ -19,7 +19,7 @@ class Rectangle:
 
     @property
     def width(self):
-        """ The width of the rectangle """
+        """The width of the rectangle"""
         return self.__width
 
     @width.setter
@@ -33,7 +33,7 @@ class Rectangle:
 
     @property
     def height(self):
-        """ The height of the rectangle """
+        """The height of the rectangle"""
         return self.__height
 
     @height.setter
@@ -44,4 +44,3 @@ class Rectangle:
         if value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
-

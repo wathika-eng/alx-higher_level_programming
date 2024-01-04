@@ -3,12 +3,13 @@
 
 
 class Rectangle:
-    """ Rectangle class """
+    """Rectangle class"""
+
     number_of_instances = 0
     print_symbol = "#"
 
     def __init__(self, width=0, height=0):
-        """ Initialize
+        """Initialize
         Args:
             width (int): width of the rectangle
             height (int): height of the rectangle
@@ -23,7 +24,7 @@ class Rectangle:
 
     @property
     def width(self):
-        """ The width of the rectangle """
+        """The width of the rectangle"""
         return self.__width
 
     @width.setter
@@ -37,7 +38,7 @@ class Rectangle:
 
     @property
     def height(self):
-        """ The height of the rectangle """
+        """The height of the rectangle"""
         return self.__height
 
     @height.setter
@@ -55,10 +56,13 @@ class Rectangle:
 
     def perimeter(self):
         """Return the perimeter of the Rectangle."""
-        return 0 if self.width == 0 or self.height == 0 else (
-                (self.width * 2) + (self.height * 2))
+        return (
+            0
+            if self.width == 0 or self.height == 0
+            else ((self.width * 2) + (self.height * 2))
+        )
 
-    def __str__(self,print_symbol="#"):
+    def __str__(self, print_symbol="#"):
         """Return the printable representation of the Rectangle.
         Represents the rectangle with the # character.
         """
@@ -67,11 +71,11 @@ class Rectangle:
 
         rectangle = []
         for i in range(self.__height):
-            [rectangle.append('#') for j in range(self.__width)]
+            [rectangle.append("#") for j in range(self.__width)]
             if i != self.__height - 1:
                 rectangle.append("\n")
         symbol = str(self.print_symbol)
-        return '\n'.join([symbol * self.width] * self.height)
+        return "\n".join([symbol * self.width] * self.height)
 
     def __repr__(self):
         """Return the string representation of the Rectangle."""
