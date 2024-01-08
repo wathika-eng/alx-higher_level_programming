@@ -1,4 +1,6 @@
 #!/usr/bin/node
+// Script that prints a message depending on the number of arguments passed:
+
 const size = parseInt(process.argv[2]);
 if (isNaN(size)) {
   console.log('Missing size');
