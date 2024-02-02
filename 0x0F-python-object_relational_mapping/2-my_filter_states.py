@@ -4,31 +4,30 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("Usage: ./0-select_states.py user password db_name")
-        sys.exit(1)
+    cursor = None
+    db = None
+    try:
+        db = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=sys.argv[1],
+            passwd=sys.argv[2],
+            db=sys.argv[3],
+        )
+        cursor = db.cursor()
 
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
-    database_name = sys.argv[3]
-    state_name = sys.argv[4]
+        cursor.execute(
+            "SELECT * FROM states WHERE name LIKE BINARY '{}'".format(sys.argv[4])
+        )
 
-    connection = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=mysql_username,
-        passwd=mysql_password,
-        db=database_name,
-    )
-    cursor = connection.cursor()
+        states = cursor.fetchall()
 
-    query = "SELECT * FROM states WHERE name=%s ORDER BY states.id ASC"
-    cursor.execute(query, (state_name,))
-
-    states = cursor.fetchall()
-
-    for state in states:
-        print(state)
-
-    cursor.close()
-    connection.close()
+        for state in states:
+            print(state)
+    except MySQLdb.Error as e:
+        print(f"{e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if db:
+            db.close()
