@@ -4,7 +4,6 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-
     cursor = None
     db = None
     try:

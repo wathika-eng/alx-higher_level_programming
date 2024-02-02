@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Add new name"""
+"""Update a state"""
 from sqlalchemy import create_engine
 import sys
 from model_state import State, Base
@@ -19,15 +19,13 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    new_state = State(name="Louisiana")
-    session.add(new_state)
+    state = session.query(State).filter_by(id=2).first()
+    state.name = "New Mexico"
     session.commit()
-    states = session.query(State).order_by(State.id)
 
-    if not states:
+    if not state:
         print("Not found")
     else:
-        for state in states:
-            print(f"{state.id}: {state.name}")
-
+        for s in state:
+            print(f"{s.id}: {s.name}")
     session.close()
