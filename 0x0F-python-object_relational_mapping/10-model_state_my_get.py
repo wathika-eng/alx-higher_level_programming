@@ -20,12 +20,19 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    states = session.query(State).filter(State.name.like(f"%{search_query}%")).first()
+    states = (
+        session.query(State)
+        .filter(
+            State.name.like(
+                f"%{search_query}%",
+            )
+        )
+        .first()
+    )
 
     if not states:
-        print("Nothing")
+        print("Not found")
     else:
-
         print(f"{states.id}")
 
     session.close()
