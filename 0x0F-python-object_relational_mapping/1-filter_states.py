@@ -3,30 +3,37 @@
 import MySQLdb
 import sys
 
-if len(sys.argv) != 4:
-    print("Usage: ./0-select_states.py user password db_name")
-    sys.exit(1)
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: ./0-select_states.py user password db_name")
+        sys.exit(1)
 
-mysql_username = sys.argv[1]
-mysql_password = sys.argv[2]
-database_name = sys.argv[3]
+    mysql_username = sys.argv[1]
+    mysql_password = sys.argv[2]
+    database_name = sys.argv[3]
+    cursor = None
+    connection = None
+    try:
+        connection = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=mysql_username,
+            passwd=mysql_password,
+            db=database_name,
+        )
+        cursor = connection.cursor()
 
-connection = MySQLdb.connect(
-    host="localhost",
-    port=3306,
-    user=mysql_username,
-    passwd=mysql_password,
-    db=database_name,
-)
-cursor = connection.cursor()
+        query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id ASC"
+        cursor.execute(query)
 
-query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id ASC"
-cursor.execute(query)
+        states = cursor.fetchall()
 
-states = cursor.fetchall()
-
-for state in states:
-    print(state)
-
-cursor.close()
-connection.close()
+        for state in states:
+            print(state)
+    except MySQLdb.Error as e:
+        print(f"{e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
