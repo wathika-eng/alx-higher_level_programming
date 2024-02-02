@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""Safe from MySQL injections"""
+"""Write a script that lists all cities from the database hbtn_0e_4_usa"""
 import sys
 import MySQLdb
 
 if __name__ == "__main__":
+
     cursor = None
     db = None
     try:
@@ -14,16 +15,18 @@ if __name__ == "__main__":
             passwd=sys.argv[2],
             db=sys.argv[3],
         )
-        state = sys.argv[4]
         cursor = db.cursor()
 
-        cursor.execute("SELECT * FROM states WHERE name LIKE %s", (state,))
+        cursor.execute(
+            """SELECT cities.id, cities.name, states.name FROM
+                cities INNER JOIN states ON states.id=cities.state_id"""
+        )
 
         states = cursor.fetchall()
 
         for state in states:
             print(state)
-    except MySQLdb.Error as e:
+    except Exception as e:
         print(f"{e}")
     finally:
         if cursor:
