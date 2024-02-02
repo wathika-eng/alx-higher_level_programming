@@ -33,7 +33,7 @@ if __name__ == "__main__":
         cities = cursor.fetchall()
         listing = tuple(city[1] for city in cities)
         print(*listing, sep=(", "))
-    except MySQLdb.Error as e:
+    except Exception as e:
         print(f"{e}")
     finally:
         if cursor:

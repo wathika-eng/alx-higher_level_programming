@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
         for state in states:
             print(state)
-    except MySQLdb.Error as e:
+    except Exception as e:
         print(f"{e}")
     finally:
         if cursor:
