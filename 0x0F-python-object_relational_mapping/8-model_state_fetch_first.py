@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Fetch data from DB using ORM"""
+"""Fetch the first instance only"""
 from sqlalchemy import create_engine
 import sys
 from model_state import State, Base
@@ -19,9 +19,12 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    states = session.query(State).order_by(State.id)
+    states = session.query(State).filter(State.id == "1")
 
-    for state in states:
-        print(f"{state.id}: {state.name}")
+    if not states:
+        print("Nothing")
+    else:
+        for state in states:
+            print(f"{state.id}: {state.name}")
 
     session.close()
