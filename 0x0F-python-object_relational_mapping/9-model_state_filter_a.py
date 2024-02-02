@@ -8,12 +8,7 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(MainEngine.main_engine)
 
-    states = (
-        MainEngine.session.query(State)
-        .order_by(State.id)
-        .filter(State.name.like("%a%"))
-        .all()
-    )
+    states = MainEngine.session.query(State).filter(State.name.like("%a%"))
 
     if not states:
         print("Nothing")
