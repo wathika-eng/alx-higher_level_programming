@@ -19,12 +19,11 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    states = session.query(State).filter(State.id == "1")
+    state = session.query(State).order_by(State.id).first()
 
-    if not states:
+    if not state:
         print("Nothing")
     else:
-        for state in states:
-            print(f"{state.id}: {state.name}")
+        print(f"{state.id}: {state.name}")
 
     session.close()
