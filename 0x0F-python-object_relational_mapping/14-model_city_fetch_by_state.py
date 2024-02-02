@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""Update a state"""
+"""Fetch data from DB using ORM"""
 from sqlalchemy import create_engine
 import sys
 from model_state import State, Base
+from model_city import City
 from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
@@ -19,13 +20,9 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    state = session.query(State).filter_by(id=2).first()
-    state.name = "New Mexico"  # type: ignore
-    session.commit()
+    cities = session.query(City).order_by(City.id).all()
 
-    if not state:
-        print("Not found")
-    else:
-        for s in state:
-            print(f"{s.id}: {s.name}")
+    for city in cities:
+        print(f"{city.state.name}: ({city.id}) {city.name}")
+
     session.close()

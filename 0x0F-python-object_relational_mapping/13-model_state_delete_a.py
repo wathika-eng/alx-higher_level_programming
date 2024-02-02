@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Update a state"""
+"""Delete a only"""
 from sqlalchemy import create_engine
 import sys
 from model_state import State, Base
@@ -19,13 +19,10 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    state = session.query(State).filter_by(id=2).first()
-    state.name = "New Mexico"  # type: ignore
-    session.commit()
+    states = session.query(State).filter(State.name.like("%a%")).all()
 
-    if not state:
-        print("Not found")
-    else:
-        for s in state:
-            print(f"{s.id}: {s.name}")
+    for state in states:
+        session.delete(state)
+
+    session.commit()
     session.close()
