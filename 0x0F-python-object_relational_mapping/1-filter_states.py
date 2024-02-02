@@ -7,21 +7,17 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: ./0-select_states.py user password db_name")
         sys.exit(1)
-
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
-    database_name = sys.argv[3]
     cursor = None
-    connection = None
+    db = None
     try:
-        connection = MySQLdb.connect(
+        db = MySQLdb.connect(
             host="localhost",
             port=3306,
-            user=mysql_username,
-            passwd=mysql_password,
-            db=database_name,
+            user=sys.argv[1],
+            passwd=sys.argv[2],
+            db=sys.argv[3],
         )
-        cursor = connection.cursor()
+        cursor = db.cursor()
 
         query = (
             "SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY states.id ASC"
@@ -37,5 +33,5 @@ if __name__ == "__main__":
     finally:
         if cursor:
             cursor.close()
-        if connection:
-            connection.close()
+        if db:
+            db.close()
