@@ -1,14 +1,25 @@
 #!/usr/bin/python3
-"""Fetch instances with letter a only"""
-from engine import MainEngine
+"""Fetch the first instance only"""
+from sqlalchemy import create_engine
+import sys
 from model_state import State, Base
-
+from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
+    user = sys.argv[1]
+    password = sys.argv[2]
+    db = sys.argv[3]
 
-    Base.metadata.create_all(MainEngine.main_engine)
+    engine = create_engine(
+        f"mysql://{user}:{password}@localhost:3306/{db}", pool_pre_ping=True
+    )
 
-    states = MainEngine.session.query(State).filter(State.name.like("%a%"))
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    Base.metadata.create_all(engine)
+
+    states = session.query(State).filter(State.name.like("%a%"))
 
     if not states:
         print("Nothing")
@@ -16,4 +27,4 @@ if __name__ == "__main__":
         for state in states:
             print(f"{state.id}: {state.name}")
 
-    MainEngine.session.close()
+    session.close()
