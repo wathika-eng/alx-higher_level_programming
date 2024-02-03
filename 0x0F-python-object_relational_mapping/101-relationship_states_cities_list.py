@@ -20,11 +20,13 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    states = session.query(State.name, City.id, City.name).join(
-        City, State.id == City.state_id
-    )
-
-    for state_name, city_id, city_name in states:
-        print(f"{state_name}: ({city_id}) {city_name} ")
+    states = session.query(State).order_by(State.id).all()
+    if not states:
+        print("nothing found")
+    else:
+        for state in states:
+            print(f"{state.id}: {state.name}")
+            for city in state.cities:
+                print(f"  {city.id}: {city.name}")
 
     session.close()
