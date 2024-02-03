@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Fetch data from DB using ORM"""
+"""Write a script that lists all City objects from the database hbtn_0e_101_usa"""
 from sqlalchemy import create_engine
 import sys
 from model_state import State, Base
